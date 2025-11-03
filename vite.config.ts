@@ -8,7 +8,7 @@ export default defineConfig({
     tailwindcss(),
     react(),
   ],
-  base: '/content-devsmith/',
+  base: '/content-devsmith-refine/',
   server: {
     port: 5173,
   },

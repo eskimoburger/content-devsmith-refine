@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark: #00060e;
+  --color-olive: #9a9f17;
+  --color-yellow: #fee801;
+  --color-sky: #54c1e6;
+  --color-teal: #39c4b6;
+  --font-family-orbitron: 'Orbitron', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Orbitron', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Orbitron font styles */
+.font-orbitron {
+  font-family: var(--font-family-orbitron);
+}
+
+.brand-text {
+  font-family: var(--font-family-orbitron);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+@keyframes gradient-border-shift {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.card-rotate {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--card-radius, 24px);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform: scale(var(--card-scale, 1));
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+}
+
+.card-rotate--flipped {
+  --card-scale: 1.05;
+}
+
+.card-rotate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: var(--card-border, 4px);
+  border-radius: inherit;
+  box-sizing: border-box;
+  background: linear-gradient(
+    60deg,
+    #0ff7b2,
+    #1fc4ff,
+    #2436ff,
+    #b026ff,
+    #ff26ff,
+    #0ff7b2
+  );
+  background-size: 400% 400%;
+  background-position: 0 50%;
+  animation: gradient-border-shift 4s ease-in-out infinite alternate;
+  animation-play-state: running;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  overflow: hidden;
+  transform: translateZ(0);
+  box-shadow: 0 0 18px rgba(23, 197, 247, 0.35);
+  z-index: 10;
+  opacity: 1;
+}
+
+.card-rotate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-sizing: border-box;
+  box-shadow: 0 0 36px rgba(65, 255, 224, 0.25);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.card-rotate--active::before {
+  animation-play-state: running;
+}
+
+.card-rotate--active::after {
+  opacity: 1;
+}
+
+.card-inner {
+  position: absolute;
+  inset: calc(var(--card-border, 4px) + 1px);
+  border-radius: calc(var(--card-radius, 24px) - var(--card-border, 4px));
+  overflow: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  z-index: 5;
+  transition: transform 0.9s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.card-face--front {
+  transform: rotateY(0deg);
+}
+
+.card-face--back {
+  transform: rotateY(180deg);
+}
+
+.card-border-glow {
+  position: absolute;
+  inset: 6px;
+  border-radius: calc(var(--card-radius, 24px) - 6px);
+  background: radial-gradient(circle at 30% 20%, rgba(65, 255, 224, 0.35), transparent 55%),
+    radial-gradient(circle at 75% 80%, rgba(255, 71, 243, 0.25), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.card-rotate--active .card-border-glow {
+  opacity: 1;
+}
+
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

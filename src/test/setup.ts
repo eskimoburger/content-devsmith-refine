@@ -34,7 +34,4 @@ global.IntersectionObserver = class IntersectionObserver {
     return [];
   }
   unobserve() {}
-  readonly root = null;
-  readonly rootMargin = '';
-  readonly thresholds = [];
 } as unknown as typeof IntersectionObserver;

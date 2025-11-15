@@ -144,16 +144,14 @@ describe('TiltedCard', () => {
   describe('mouse interactions', () => {
     it('should handle mouse move events', async () => {
       const user = userEvent.setup();
-      const { container } = render(<TiltedCard {...defaultProps} />);
+      render(<TiltedCard {...defaultProps} />);
 
-      const figure = container.querySelector('figure');
+      const figure = screen.getByRole('figure');
       expect(figure).toBeInTheDocument();
 
-      if (figure) {
-        await user.hover(figure);
-        // Motion values should be set (no errors)
-        expect(figure).toBeInTheDocument();
-      }
+      await user.hover(figure);
+      // Motion values should be set (no errors)
+      expect(figure).toBeInTheDocument();
     });
 
     it('should handle mouse enter events', async () => {

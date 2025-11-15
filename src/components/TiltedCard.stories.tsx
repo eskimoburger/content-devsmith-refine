@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import TiltedCard from './TiltedCard';
 import reactLogo from '../assets/react.svg';
 

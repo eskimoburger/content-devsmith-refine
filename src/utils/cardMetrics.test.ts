@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { calculateCardMetrics, getInitialViewportWidth } from './cardMetrics';
 
 describe('calculateCardMetrics', () => {
@@ -71,7 +71,7 @@ describe('calculateCardMetrics', () => {
   describe('container calculations', () => {
     it('should calculate container dimensions correctly', () => {
       const metrics = calculateCardMetrics(1024);
-      const { cardWidth, cardHeight, gap } = metrics;
+      const { cardHeight, gap } = metrics;
 
       expect(metrics.containerHeight).toBe(cardHeight * 2 + gap + 48);
       expect(metrics.containerMaxWidth).toBeLessThanOrEqual(1024 - 16);

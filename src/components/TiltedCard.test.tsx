@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import TiltedCard from './TiltedCard';
 
 describe('TiltedCard', () => {
@@ -104,7 +104,7 @@ describe('TiltedCard', () => {
 
   describe('overlay content', () => {
     it('should not render overlay when displayOverlayContent is false', () => {
-      const { container } = render(
+      render(
         <TiltedCard
           {...defaultProps}
           overlayContent={<div data-testid="overlay">Overlay</div>}
